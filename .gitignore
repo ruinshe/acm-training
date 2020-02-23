@@ -18,3 +18,4 @@ main
 .vscode
 go.sum
 /acm-training
+/coverage.txt

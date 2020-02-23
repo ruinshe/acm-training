@@ -16,9 +16,6 @@ const (
 	headerAuthorization = "Authorization"
 	headerBearer        = "Bearer"
 	configSecret        = "token.secret"
-
-	claimKeyGenerated = "generated"
-	claimKeyPhone     = "phone"
 )
 
 var (
@@ -27,6 +24,14 @@ var (
 	tokenCache = gcache.New()
 	jwtSecret  []byte
 )
+
+// AuthorizationClaims - the customized JWT claims for type-safe type.
+// More details are available at https://github.com/dgrijalva/jwt-go/issues/287
+type AuthorizationClaims struct {
+	Generated int64  `json:"generated"`
+	Phone     string `json:"phone"`
+	jwt.StandardClaims
+}
 
 func init() {
 	jwtSecret = []byte(g.Config().GetString(configSecret))
@@ -49,9 +54,10 @@ func getTokenForUser(phone string) (token string, exists bool) {
 // token of the phone when this function called.
 func CreateTokenForUser(phone string) string {
 	token := jwt.New(jwt.SigningMethodHS256)
-	claims := make(jwt.MapClaims)
-	claims[claimKeyGenerated] = time.Now().Unix()
-	claims[claimKeyPhone] = phone
+	claims := AuthorizationClaims{
+		Generated: time.Now().Unix(),
+		Phone:     phone,
+	}
 
 	token.Claims = claims
 	tokenString, err := token.SignedString(jwtSecret)
@@ -77,8 +83,9 @@ func AuthenticationInterceptor(r *ghttp.Request) {
 			return
 		}
 
-		token := parts[1]
-		parseAuth, err := jwt.Parse(token, func(*jwt.Token) (interface{}, error) {
+		tokenString := parts[1]
+		claims := AuthorizationClaims{}
+		_, err := jwt.ParseWithClaims(tokenString, &claims, func(*jwt.Token) (interface{}, error) {
 			return jwtSecret, nil
 		})
 		if err != nil {
@@ -89,16 +96,8 @@ func AuthenticationInterceptor(r *ghttp.Request) {
 			return
 		}
 
-		//将token中的内容存入parmMap
-		claims := parseAuth.Claims.(jwt.MapClaims)
-		var phone interface{} = nil
-		for key, value := range claims {
-			if key == claimKeyPhone {
-				phone = value
-			}
-		}
-		cached := tokenCache.Get(phone)
-		if cached == nil || cached.(string) != token {
+		cached := tokenCache.Get(claims.Phone)
+		if cached == nil || cached.(string) != tokenString {
 			r.Response.WriteJsonExit(api.Response{
 				ErrorCode:    "SYS_INVALID_AUTHORIZATION_TOKEN",
 				ErrorMessage: "Invalid authorization token, please re-login to correct it.",
