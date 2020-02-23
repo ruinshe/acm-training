@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  mysql:
+    restart: always
+    image: mysql:5.7.29
+    container_name: acm-training-mysql
+    hostname: acm-training-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3306:3306
+    volumes:
+      - /srv/uestc-acm/acm-training-mysql:/var/lib/mysql
