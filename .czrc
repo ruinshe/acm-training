@@ -19,6 +19,10 @@
             {
               "name": "database models and corresponding generated code",
               "value": "db"
+            },
+            {
+              "name": "dcoument related changes, including separated README change",
+              "value": "document"
             }
           ]
         },
