@@ -1,21 +1,38 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
--- whole database
 DROP DATABASE IF EXISTS uestc_acm_training;
-
 CREATE SCHEMA IF NOT EXISTS uestc_acm_training DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 USE uestc_acm_training;
-
 -- user table
-DROP TABLE IF EXISTS `user` ;
-
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-    `id` BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT ,
-    `name` VARCHAR(24) NOT NULL UNIQUE,
-    `email` VARCHAR(100) NOT NULL UNIQUE,
-    `phone` VARCHAR(45) NOT NULL UNIQUE,
-    -- sha256sum
-    `password` VARCHAR(130) NOT NULL UNIQUE,
-    `rating` INT NOT NULL DEFAULT 1500) ENGINE = InnoDB;
+  `id` BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `name` VARCHAR(24) NOT NULL UNIQUE,
+  `email` VARCHAR(100) NOT NULL UNIQUE,
+  `phone` VARCHAR(45) NOT NULL UNIQUE,
+  -- sha256sum
+  `password` VARCHAR(130) NOT NULL UNIQUE,
+  `rating` INT NOT NULL DEFAULT 1500
+) ENGINE = InnoDB;
+INSERT INTO `user` (
+    `id`,
+    `name`,
+    `email`,
+    `phone`,
+    `password`,
+    `rating`
+  )
+VALUES(
+    1,
+    'administrator',
+    'admin@acm.uestc.edu.cn',
+    '13122222222',
+    'f3d6e24c7d6976f1a6267e2c9a294caa545e7b381a55d4600bee9fdca5a432c7af3404f0cacaccfb03f513d0f7ad913155b174f26698499a5b2381bc2f925ad9',
+    1500
+  );
+CREATE TABLE IF NOT EXISTS `contest` (
+    `id` BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(128) NOT NULL,
+    `description` VARCHAR(128) DEFAULT NULL,
+    `url` VARCHAR(1024) DEFAULT NULL COMMENT 'the contest link, if it is online',
+    `start_time` BIGINT NOT NULL COMMENT 'the start time of the contest, as unix timestamp',
+    `duration` BIGINT NOT NULL DEFAULT 1500 COMMENT 'the duration of the contest, unit in seconds'
+  ) ENGINE = InnoDB;
