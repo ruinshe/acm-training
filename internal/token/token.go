@@ -106,5 +106,10 @@ func AuthenticationInterceptor(r *ghttp.Request) {
 		}
 
 		r.Middleware.Next()
+	} else {
+		r.Response.WriteJsonExit(api.Response{
+			ErrorCode:    "SYS_UNAURHORIZED",
+			ErrorMessage: "Should login to gain permission for this API.",
+		})
 	}
 }
