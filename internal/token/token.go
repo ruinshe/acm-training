@@ -72,6 +72,7 @@ func CreateTokenForUser(phone string) string {
 // AuthenticationInterceptor - the interceptor for all need authorization APIs.
 func AuthenticationInterceptor(r *ghttp.Request) {
 	authorizationHeader := r.Header.Get(headerAuthorization)
+	logger.Debugf("received authorization header: %v", authorizationHeader)
 	if authorizationHeader != "" {
 		parts := strings.SplitN(authorizationHeader, " ", 2)
 		if len(parts) != 2 || parts[0] != headerBearer || parts[1] == "" {
