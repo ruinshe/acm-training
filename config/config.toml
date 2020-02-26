@@ -1,34 +1,35 @@
 # HTTP Server
 [server]
-	Address     = ":8080"
-	ServerRoot  = "public"
-	ServerAgent = "acm-training"
-	LogPath     = "/tmp/log/acm-training/server"
+Address = ":8080"
+ServerRoot = "public"
+ServerAgent = "acm-training"
+LogPath = "/tmp/log/acm-training/server"
 
 # Logger.
 [logger]
-    Path        = "/tmp/log/acm-training"
-    Level       = "all"
-    Stdout      = true
+Path = "/tmp/log/acm-training"
+Level = "all"
+Stdout = true
 
 # Template.
 [viewer]
-    Path        = "template"
-    DefaultFile = "index.html"
-    Delimiters  =  ["${", "}"]
+Path = "template"
+DefaultFile = "index.html"
+Delimiters = ["${", "}"]
 
 # Database.
 [database]
-    link  = "mysql:root:root@tcp(127.0.0.1:3306)/uestc_acm_training"
-    debug = true
-    # Database logger.
-    [database.logger]
-        Path   = "/tmp/log/acm-training/sql"
-        Level  = "all"
-        Stdout = true
+link = "mysql:root:root@tcp(127.0.0.1:3306)/uestc_acm_training"
+debug = true
+
+# Database logger.
+[database.logger]
+Path = "/tmp/log/acm-training/sql"
+Level = "all"
+Stdout = true
 
 [api]
-    signUpEnabled = true
+signUpEnabled = true
 
 [token]
-    secret = "65eaeadf776d272616c15c517e70474150d9bd2d0f7e377335fa74db86130299"
+secret = "65eaeadf776d272616c15c517e70474150d9bd2d0f7e377335fa74db86130299"
