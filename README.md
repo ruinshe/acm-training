@@ -3,7 +3,7 @@ github.com/ruinshe/acm-training
 [![Build Status](https://travis-ci.com/ruinshe/acm-training.svg?branch=master)](https://travis-ci.com/ruinshe/acm-training)
 [![codecov](https://codecov.io/gh/ruinshe/acm-training/branch/master/graph/badge.svg)](https://codecov.io/gh/ruinshe/acm-training)
 [![Go Report Card](https://goreportcard.com/badge/github.com/ruinshe/acm-training)](https://goreportcard.com/report/github.com/ruinshe/acm-training)
-![](https://img.shields.io/badge/version-0.0.6-blue.svg)
+![](https://img.shields.io/badge/version-0.0.7-blue.svg)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Join the chat at https://gitter.im//UESTC-ACM/acm-training](https://badges.gitter.im//UESTC-ACM/acm-training.svg)](https://gitter.im//UESTC-ACM/acm-training?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 

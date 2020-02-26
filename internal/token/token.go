@@ -37,18 +37,6 @@ func init() {
 	jwtSecret = []byte(g.Config().GetString(configSecret))
 }
 
-// getTokenForUser - get token for the user, or exists = false for non existing case.
-func getTokenForUser(phone string) (token string, exists bool) {
-	cached := gcache.Get(phone)
-	if cached == nil {
-		exists = false
-	} else {
-		token = cached.(string)
-		exists = true
-	}
-	return
-}
-
 // CreateTokenForUser - creates the token of specific user, by their phone.
 // Since we don't support multi-login, we will replace the existing cached
 // token of the phone when this function called.

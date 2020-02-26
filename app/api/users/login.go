@@ -3,7 +3,7 @@ package users
 import (
 	"database/sql"
 
-	userModel "github.com/UESTC-ACM/acm-training/app/model/user"
+	model "github.com/UESTC-ACM/acm-training/app/model/users"
 	"github.com/UESTC-ACM/acm-training/internal/api"
 	"github.com/UESTC-ACM/acm-training/internal/token"
 	"github.com/UESTC-ACM/acm-training/internal/utils/encrypt"
@@ -23,8 +23,8 @@ func Login(r *ghttp.Request) {
 			ErrorMessage: err.Error(),
 		})
 	}
-	var persisted *userModel.Entity
-	if err := userModel.Model.M.Struct(&persisted, userModel.Model.Where("phone like ?", request.Phone)); err != nil {
+	var persisted *model.Entity
+	if err := model.Model.M.Struct(&persisted, model.Model.Where("phone like ?", request.Phone)); err != nil {
 		if err == sql.ErrNoRows {
 			r.Response.WriteJsonExit(api.Response{
 				ErrorCode:    "USER_NOT_FOUND",

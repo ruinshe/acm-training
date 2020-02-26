@@ -1,0 +1,9 @@
+POST http://127.0.0.1:8080/api/v1/users/signup
+
+{
+    "name": "new-user",
+    "email": "new-user@gmail.com",
+    "phone": "18100000000",
+    "password": "passowrd",
+    "confirmed_password": "passowrd"
+}
