@@ -35,54 +35,66 @@
       "types": [
         {
           "description": "Add new feature",
-          "title": "feat"
+          "title": "feat",
+          "name": "feat"
         },
         {
           "description": "A bug fix",
-          "title": "fix"
+          "title": "fix",
+          "name": "fix"
         },
         {
           "description": "An improvement to a current feature",
-          "title": "improvement:"
+          "title": "improvement:",
+          "name": "improvement:"
         },
         {
           "description": "Documentation only changes",
-          "title": "docs"
+          "title": "docs",
+          "name": "docs"
         },
         {
           "description": "Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)",
-          "title": "style"
+          "title": "style",
+          "name": "style"
         },
         {
           "description": "A code change that neither fixes a bug nor adds a feature",
-          "title": "refactor"
+          "title": "refactor",
+          "name": "refactor"
         },
         {
           "description": "A code change that improves performance",
-          "title": "perf"
+          "title": "perf",
+          "name": "perf"
         },
         {
           "description": "Adding missing tests or correcting existing tests",
-          "title": "test"
+          "title": "test",
+          "name": "test"
         },
         {
           "description": "Changes that affect the build system or external dependencies (e.g. go.mod)",
-          "title": "build"
+          "title": "build",
+          "name": "build"
         },
         {
           "description": "Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)",
-          "title": "ci"
+          "title": "ci",
+          "name": "ci"
         },
         {
           "description": "Other changes that don't modify src or test files",
-          "title": "chore"
+          "title": "chore",
+          "name": "chore"
         },
         {
           "description": "Reverts a previous commit",
-          "title": "revert"
+          "title": "revert",
+          "name": "revert"
         }
       ],
-      "formula": "${title}(${scope}): ${subject}"
+      "formula": "${name}${scope}: ${subject}"
     }
   }
 }
