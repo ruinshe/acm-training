@@ -1,4 +1,4 @@
-package service
+package api
 
 import (
 	"fmt"
@@ -16,20 +16,14 @@ const (
 	defaultSize = 50
 )
 
-// RequestPage - the page informatin passed from UI side.
-type RequestPage struct {
-	Page int `json:"page"`
-	Size int `json:"size"`
-}
-
 // ParseRequestPage - create a ParseRequestPage object from the request parameter.
-func ParseRequestPage(r *ghttp.Request) (*RequestPage, *api.Error) {
+func ParseRequestPage(r *ghttp.Request) (*api.RequestPage, *api.Error) {
 	pageVar := r.Get(requestParameterPage)
 	sizeVar := r.Get(requestParameterSize)
 	page := defaultPage
 	var err error
 	if pageVar != nil {
-		if page, err = strconv.Atoi(pageVar.(string)); err != nil {
+		if page, err = strconv.Atoi(pageVar.(string)); err != nil || page <= 0 {
 			return nil, &api.Error{
 				ErrorCode:    "SYS_INVALID_REQUEST_PARAMETER",
 				ErrorMessage: fmt.Sprintf("Invalid request parameter value of parameter 'page': %v", pageVar),
@@ -38,12 +32,12 @@ func ParseRequestPage(r *ghttp.Request) (*RequestPage, *api.Error) {
 	}
 	size := defaultSize
 	if sizeVar != nil {
-		if size, err = strconv.Atoi(pageVar.(string)); err != nil {
+		if size, err = strconv.Atoi(pageVar.(string)); err != nil || size <= 0 {
 			return nil, &api.Error{
 				ErrorCode:    "SYS_INVALID_REQUEST_PARAMETER",
 				ErrorMessage: fmt.Sprintf("Invalid request parameter value of parameter 'size': %v", sizeVar),
 			}
 		}
 	}
-	return &RequestPage{Page: page, Size: size}, nil
+	return &api.RequestPage{Page: page, Size: size}, nil
 }

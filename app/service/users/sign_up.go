@@ -12,7 +12,6 @@ import (
 )
 
 var (
-	logger      = g.Log("service")
 	signUpError = api.Response{
 		Error: &api.Error{
 			ErrorCode:    "USER_SIGN_UP_FAILED",
