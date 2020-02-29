@@ -12,3 +12,9 @@ services:
       - 3306:3306
     volumes:
       - /srv/uestc-acm/acm-training-mysql:/var/lib/mysql
+  server:
+    image: ruinshe/acm-training:latest
+    container_name: acm-training-server
+    hostname: acm-training-server
+    ports:
+      - 8080:8080

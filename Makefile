@@ -48,6 +48,10 @@ coverage: $(TEST_SOURCES) lint
 coverage-report: coverage
 	$(GO) tool cover --html=$(COVERAGE_REPORT)
 
+.PHONY: package
+package: $(SOURCES)
+	gf docker -f docker/Dockerfile -t ruinshe/acm-training
+
 .PHONY: clean
 clean:
 	@echo "Perform cleanup..."
