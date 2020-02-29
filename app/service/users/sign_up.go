@@ -3,12 +3,12 @@ package users
 import (
 	"database/sql"
 
-	model "github.com/UESTC-ACM/acm-training/app/model/users"
-	"github.com/UESTC-ACM/acm-training/internal/api"
-	"github.com/UESTC-ACM/acm-training/internal/rating"
-	apiUtils "github.com/UESTC-ACM/acm-training/internal/utils/api"
-	"github.com/UESTC-ACM/acm-training/internal/utils/encrypt"
 	"github.com/gogf/gf/frame/g"
+	model "github.com/ruinshe/acm-training/app/model/users"
+	"github.com/ruinshe/acm-training/internal/api"
+	"github.com/ruinshe/acm-training/internal/rating"
+	apiUtils "github.com/ruinshe/acm-training/internal/utils/api"
+	"github.com/ruinshe/acm-training/internal/utils/encrypt"
 )
 
 var (

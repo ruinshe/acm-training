@@ -3,10 +3,10 @@ package api_test
 import (
 	"encoding/json"
 
-	. "github.com/UESTC-ACM/acm-training/internal/api"
 	"github.com/gogf/gf/frame/g"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	. "github.com/ruinshe/acm-training/internal/api"
 )
 
 var _ = Describe("Response JSON encoding and decoding", func() {

@@ -1,9 +1,9 @@
 package users
 
 import (
-	service "github.com/UESTC-ACM/acm-training/app/service/users"
-	"github.com/UESTC-ACM/acm-training/internal/api"
 	"github.com/gogf/gf/net/ghttp"
+	service "github.com/ruinshe/acm-training/app/service/users"
+	"github.com/ruinshe/acm-training/internal/api"
 )
 
 // SignUp - sign up a new user according to the basic fields.

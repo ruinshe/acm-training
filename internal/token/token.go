@@ -4,11 +4,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/UESTC-ACM/acm-training/internal/api"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/gcache"
+	"github.com/ruinshe/acm-training/internal/api"
 )
 
 const (

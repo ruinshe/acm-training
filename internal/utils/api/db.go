@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/UESTC-ACM/acm-training/internal/api"
 	"github.com/gogf/gf/os/glog"
+	"github.com/ruinshe/acm-training/internal/api"
 )
 
 // RecordDBError - records a DB error and return corresponding error to user side.

@@ -1,11 +1,11 @@
 package router
 
 import (
-	"github.com/UESTC-ACM/acm-training/app/api/users"
-	"github.com/UESTC-ACM/acm-training/internal/api"
-	"github.com/UESTC-ACM/acm-training/internal/token"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
+	"github.com/ruinshe/acm-training/app/api/users"
+	"github.com/ruinshe/acm-training/internal/api"
+	"github.com/ruinshe/acm-training/internal/token"
 )
 
 func init() {

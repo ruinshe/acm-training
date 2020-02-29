@@ -1,4 +1,4 @@
-module github.com/UESTC-ACM/acm-training
+module github.com/ruinshe/acm-training
 
 require (
 	bou.ke/monkey v1.0.2

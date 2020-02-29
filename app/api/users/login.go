@@ -3,12 +3,12 @@ package users
 import (
 	"database/sql"
 
-	model "github.com/UESTC-ACM/acm-training/app/model/users"
-	"github.com/UESTC-ACM/acm-training/internal/api"
-	"github.com/UESTC-ACM/acm-training/internal/token"
-	"github.com/UESTC-ACM/acm-training/internal/utils/encrypt"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
+	model "github.com/ruinshe/acm-training/app/model/users"
+	"github.com/ruinshe/acm-training/internal/api"
+	"github.com/ruinshe/acm-training/internal/token"
+	"github.com/ruinshe/acm-training/internal/utils/encrypt"
 )
 
 // Login - login into the system.

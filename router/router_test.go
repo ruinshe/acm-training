@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/UESTC-ACM/acm-training/internal/token"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/ruinshe/acm-training/internal/token"
 )
 
 const port = 47088
