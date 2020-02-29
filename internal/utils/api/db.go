@@ -9,7 +9,9 @@ import (
 func RecordDBError(logger *glog.Logger, err error) api.Response {
 	logger.Fatalf("error occurs when query against databse: %v", err.Error())
 	return api.Response{
-		ErrorCode:    "SYS_DB_ERROR",
-		ErrorMessage: "error occurs when query against databse.",
+		Error: &api.Error{
+			ErrorCode:    "SYS_DB_ERROR",
+			ErrorMessage: "error occurs when query against databse.",
+		},
 	}
 }

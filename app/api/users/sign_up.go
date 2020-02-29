@@ -11,8 +11,10 @@ func SignUp(r *ghttp.Request) {
 	var user *service.SignUpRequest
 	if err := r.Parse(&user); err != nil {
 		r.Response.WriteJsonExit(api.Response{
-			ErrorCode:    "SYS_INVALID_REQUEST_BODY",
-			ErrorMessage: err.Error(),
+			Error: &api.Error{
+				ErrorCode:    "SYS_INVALID_REQUEST_BODY",
+				ErrorMessage: err.Error(),
+			},
 		})
 	}
 

@@ -55,8 +55,10 @@ var _ = Describe("authorization token interceptor", func() {
 			client.SetPrefix(fmt.Sprintf("http://127.0.0.1:%v", port))
 			Ω(client.GetContent("/router-test/authorization-token-interceptor/need-login")).
 				Should(MatchJSON(`{
-					"error_code":    "SYS_UNAURHORIZED",
-					"error_message": "Should login to gain permission for this API."
+					"error": {
+						"error_code":    "SYS_UNAURHORIZED",
+						"error_message": "Should login to gain permission for this API."
+					}
 				}`))
 		})
 		It("should return normally wihout authorization error after login.", func() {

@@ -19,30 +19,38 @@ func Login(r *ghttp.Request) {
 	}
 	if err := r.Parse(&request); err != nil {
 		r.Response.WriteJsonExit(api.Response{
-			ErrorCode:    "SYS_INVALID_REQUEST_BODY",
-			ErrorMessage: err.Error(),
+			Error: &api.Error{
+				ErrorCode:    "SYS_INVALID_REQUEST_BODY",
+				ErrorMessage: err.Error(),
+			},
 		})
 	}
 	var persisted *model.Entity
 	if err := model.Model.M.Struct(&persisted, model.Model.Where("phone like ?", request.Phone)); err != nil {
 		if err == sql.ErrNoRows {
 			r.Response.WriteJsonExit(api.Response{
-				ErrorCode:    "USER_NOT_FOUND",
-				ErrorMessage: "The user is not found in the system.",
+				Error: &api.Error{
+					ErrorCode:    "USER_NOT_FOUND",
+					ErrorMessage: "The user is not found in the system.",
+				},
 			})
 		} else {
 			g.Log("api").Fatalf("Error occurs when finding existing user by phone: %v", err.Error())
 			r.Response.WriteJsonExit(api.Response{
-				ErrorCode:    "SYS_INTERNAL_ERROR_OCCURS",
-				ErrorMessage: "Internal server error occurs.",
+				Error: &api.Error{
+					ErrorCode:    "SYS_INTERNAL_ERROR_OCCURS",
+					ErrorMessage: "Internal server error occurs.",
+				},
 			})
 		}
 	}
 
 	if encrypted, err := encrypt.Pasword(request.Password); err != nil || encrypted != persisted.Password {
 		r.Response.WriteJsonExit(api.Response{
-			ErrorCode:    "USER_INVALID_PASSOWRD",
-			ErrorMessage: "The password is incorrect.",
+			Error: &api.Error{
+				ErrorCode:    "USER_INVALID_PASSOWRD",
+				ErrorMessage: "The password is incorrect.",
+			},
 		})
 	}
 

@@ -16,6 +16,9 @@ const (
 	headerAuthorization = "Authorization"
 	headerBearer        = "Bearer"
 	configSecret        = "token.secret"
+
+	// SessionAuthorizationClaimsKey - the session key storing the authorization claims.
+	SessionAuthorizationClaimsKey = "authorizationClaims"
 )
 
 var (
@@ -57,6 +60,11 @@ func CreateTokenForUser(phone string) string {
 	return tokenString
 }
 
+// RemoveUserToken - remove the user token in the token cache.
+func RemoveUserToken(phone string) {
+	tokenCache.Remove(phone)
+}
+
 // AuthenticationInterceptor - the interceptor for all need authorization APIs.
 func AuthenticationInterceptor(r *ghttp.Request) {
 	authorizationHeader := r.Header.Get(headerAuthorization)
@@ -66,8 +74,10 @@ func AuthenticationInterceptor(r *ghttp.Request) {
 		if len(parts) != 2 || parts[0] != headerBearer || parts[1] == "" {
 			logger.Debugf("Invalid token set from user: %v", authorizationHeader)
 			r.Response.WriteJsonExit(api.Response{
-				ErrorCode:    "SYS_UNAURHORIZED",
-				ErrorMessage: "Should login to gain permission for this API.",
+				Error: &api.Error{
+					ErrorCode:    "SYS_UNAURHORIZED",
+					ErrorMessage: "Should login to gain permission for this API.",
+				},
 			})
 			return
 		}
@@ -79,8 +89,10 @@ func AuthenticationInterceptor(r *ghttp.Request) {
 		})
 		if err != nil {
 			r.Response.WriteJsonExit(api.Response{
-				ErrorCode:    "SYS_INVALID_AUTHORIZATION_TOKEN",
-				ErrorMessage: "Invalid authorization token, please re-login to correct it.",
+				Error: &api.Error{
+					ErrorCode:    "SYS_INVALID_AUTHORIZATION_TOKEN",
+					ErrorMessage: "Invalid authorization token, please re-login to correct it.",
+				},
 			})
 			return
 		}
@@ -88,17 +100,23 @@ func AuthenticationInterceptor(r *ghttp.Request) {
 		cached := tokenCache.Get(claims.Phone)
 		if cached == nil || cached.(string) != tokenString {
 			r.Response.WriteJsonExit(api.Response{
-				ErrorCode:    "SYS_INVALID_AUTHORIZATION_TOKEN",
-				ErrorMessage: "Invalid authorization token, please re-login to correct it.",
+				Error: &api.Error{
+					ErrorCode:    "SYS_INVALID_AUTHORIZATION_TOKEN",
+					ErrorMessage: "Invalid authorization token, please re-login to correct it.",
+				},
 			})
 			return
 		}
 
+		r.Session.Set(SessionAuthorizationClaimsKey, claims)
+
 		r.Middleware.Next()
 	} else {
 		r.Response.WriteJsonExit(api.Response{
-			ErrorCode:    "SYS_UNAURHORIZED",
-			ErrorMessage: "Should login to gain permission for this API.",
+			Error: &api.Error{
+				ErrorCode:    "SYS_UNAURHORIZED",
+				ErrorMessage: "Should login to gain permission for this API.",
+			},
 		})
 	}
 }

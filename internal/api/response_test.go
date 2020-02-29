@@ -6,6 +6,7 @@ import (
 	"github.com/gogf/gf/frame/g"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/ruinshe/acm-training/internal/api"
 	. "github.com/ruinshe/acm-training/internal/api"
 )
 
@@ -34,10 +35,12 @@ var _ = Describe("Response JSON encoding and decoding", func() {
 
 	Context("normal response with error and no data field filled", func() {
 		response := Response{
-			ErrorCode:    "SYS_ERROR_CODE",
-			ErrorMessage: "message of the error",
+			Error: &api.Error{
+				ErrorCode:    "SYS_ERROR_CODE",
+				ErrorMessage: "message of the error",
+			},
 		}
-		jsonBytes := []byte(`{"error_code":"SYS_ERROR_CODE","error_message":"message of the error"}`)
+		jsonBytes := []byte(`{"error":{"error_code":"SYS_ERROR_CODE","error_message":"message of the error"}}`)
 
 		It("Should be decoded without data fields", func() {
 			encoded, err := json.Marshal(response)

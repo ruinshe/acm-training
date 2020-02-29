@@ -14,8 +14,10 @@ import (
 var (
 	logger      = g.Log("service")
 	signUpError = api.Response{
-		ErrorCode:    "USER_SIGN_UP_FAILED",
-		ErrorMessage: "sign up process failed, pleas have another try",
+		Error: &api.Error{
+			ErrorCode:    "USER_SIGN_UP_FAILED",
+			ErrorMessage: "sign up process failed, pleas have another try",
+		},
 	}
 )
 
@@ -39,13 +41,17 @@ func SignUp(user *SignUpRequest) api.Response {
 		for _, userInDB := range persisted {
 			if userInDB.Email == user.Email {
 				return api.Response{
-					ErrorCode:    "USER_EMAIL_IN_USED",
-					ErrorMessage: "the email is in used for other user",
+					Error: &api.Error{
+						ErrorCode:    "USER_EMAIL_IN_USED",
+						ErrorMessage: "the email is in used for other user",
+					},
 				}
 			} else if userInDB.Phone == user.Phone {
 				return api.Response{
-					ErrorCode:    "USER_PHONE_IN_USED",
-					ErrorMessage: "the phone is in used for other user",
+					Error: &api.Error{
+						ErrorCode:    "USER_PHONE_IN_USED",
+						ErrorMessage: "the phone is in used for other user",
+					},
 				}
 			}
 		}
