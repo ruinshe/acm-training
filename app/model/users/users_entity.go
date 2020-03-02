@@ -11,12 +11,13 @@ import (
 
 // Entity is the golang structure for table users.
 type Entity struct {
-    Id       int64  `orm:"id,primary"      json:"id"`       //   
-    Name     string `orm:"name,unique"     json:"name"`     //   
-    Email    string `orm:"email,unique"    json:"email"`    //   
-    Phone    string `orm:"phone,unique"    json:"phone"`    //   
-    Password string `orm:"password,unique" json:"password"` //   
-    Rating   int    `orm:"rating"          json:"rating"`   //   
+    Id       int64  `orm:"id,primary"      json:"id"`        //   
+    SeasonId int64  `orm:"season_id"       json:"season_id"` //   
+    Name     string `orm:"name,unique"     json:"name"`      //   
+    Email    string `orm:"email,unique"    json:"email"`     //   
+    Phone    string `orm:"phone,unique"    json:"phone"`     //   
+    Password string `orm:"password,unique" json:"password"`  //   
+    Rating   int    `orm:"rating"          json:"rating"`    //   
 }
 
 // OmitEmpty sets OPTION_OMITEMPTY option for the model, which automatically filers

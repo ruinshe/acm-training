@@ -11,11 +11,12 @@ import (
 
 // Entity is the golang structure for table teams.
 type Entity struct {
-    Id      int64  `orm:"id,primary" json:"id"`       //                              
-    Name    string `orm:"name"       json:"name"`     //                              
-    Captain int64  `orm:"captain"    json:"captain"`  // the id of the captain user   
-    Member1 int64  `orm:"member1"    json:"member_1"` // the id of the first member   
-    Member2 int64  `orm:"member2"    json:"member_2"` // the id of the second member  
+    Id       int64  `orm:"id,primary" json:"id"`        //                              
+    SeasonId int64  `orm:"season_id"  json:"season_id"` //                              
+    Name     string `orm:"name"       json:"name"`      //                              
+    Captain  int64  `orm:"captain"    json:"captain"`   // the id of the captain user   
+    Member1  int64  `orm:"member1"    json:"member_1"`  // the id of the first member   
+    Member2  int64  `orm:"member2"    json:"member_2"`  // the id of the second member  
 }
 
 // OmitEmpty sets OPTION_OMITEMPTY option for the model, which automatically filers
