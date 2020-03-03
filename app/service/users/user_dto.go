@@ -8,6 +8,7 @@ import (
 // UserDto - the data transfer object for user entities.
 type UserDto struct {
 	ID       int64  `json:"id,omitempty"`
+	SeasonID int64  `json:"season_id,omitempty"`
 	Name     string `json:"name,omitempty"`
 	Email    string `json:"email,omitempty"`
 	Phone    string `json:"phone,omitempty"`
@@ -20,6 +21,9 @@ func Of(entity *model.Entity, columns *gset.Set) UserDto {
 	result := UserDto{}
 	if columns.Contains(model.ColumnID) {
 		result.ID = entity.Id
+	}
+	if columns.Contains(model.ColumnSeasonID) {
+		result.SeasonID = entity.SeasonId
 	}
 	if columns.Contains(model.ColumnName) {
 		result.Name = entity.Name

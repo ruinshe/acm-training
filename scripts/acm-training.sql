@@ -3,7 +3,7 @@ CREATE SCHEMA IF NOT EXISTS uestc_acm_training DEFAULT CHARACTER SET utf8mb4 COL
 USE uestc_acm_training;
 DROP TABLE IF EXISTS `configurations`;
 CREATE TABLE IF NOT EXISTS `configurations` (
-  `key` varchar(128) PRIMARY KEY,
+  `identifier` varchar(128) PRIMARY KEY,
   `value` varchar(128)
 ) ENGINE = InnoDB;
 DROP TABLE IF EXISTS `seasons`;

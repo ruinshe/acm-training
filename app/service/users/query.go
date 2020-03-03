@@ -12,13 +12,13 @@ import (
 // avoid sending sensitive information to the frontend size.
 func Query(where interface{}, requestPage *api.RequestPage, columns *gset.Set) (*api.Page, error) {
 	var users []model.Entity
-	err := model.Model.M.Page(requestPage.Page, requestPage.Size).Structs(&users, where)
+	err := model.Scan(requestPage, &users, where)
 	if err != nil {
 		logger.Fatalf("Error occurs when perform user query: %v", err.Error())
 		return nil, err
 	}
 
-	count, err := model.Model.Count(where)
+	count, err := model.Count(where)
 	if err != nil {
 		logger.Fatalf("Error occurs when figuring out the count of query: %v", err.Error())
 		return nil, err

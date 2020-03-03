@@ -1,6 +1,6 @@
 USE uestc_acm_training;
-INSERT INTO `configurations` (`key`, `value`)
-VALUES('current_season_id', 1);
+INSERT INTO `configurations` (`identifier`, `value`)
+VALUES('current_season_id', '1');
 INSERT INTO `seasons` (`id`, `name`)
 VALUES(1, 'default season');
 INSERT INTO `users` (

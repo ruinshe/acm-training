@@ -28,8 +28,5 @@ Path = "/tmp/log/acm-training/sql"
 Level = "all"
 Stdout = true
 
-[api]
-signUpEnabled = true
-
 [token]
 secret = "65eaeadf776d272616c15c517e70474150d9bd2d0f7e377335fa74db86130299"

@@ -20,9 +20,6 @@ func init() {
 	})
 	s.Group("/api/v1/users", func(group *ghttp.RouterGroup) {
 		group.POST("/login", users.Login)
-		if g.Cfg().GetBool("api.signUpEnabled") {
-			group.POST("/signup", users.SignUp)
-		}
 		group.GET("/", users.GetUsers)
 	})
 	s.Group("/api/v1/users", func(group *ghttp.RouterGroup) {
